@@ -2,3 +2,16 @@ Integrantes:
 
 Millarayen Ferrada
 Zihao Xiao
+
+
+parte a: encontrar errores de sintaxis
+milla:corregir codigo
+xiao:comparar condido indicando los errores
+identificacion de errores de sintaxis:
+
+1,si la clase es "public" el nombre del archivo y el de la clase deben ser el mismo o también se puede resolver agregando el siguiente al inicio del codigo"package org.example;
+2, en la linea )" String [][] registro = new double[50][3];" el "doble " debe ser String.
+3, en la liena 45 "int edad;" en vez de int deber ser un staring debido a que la matriz anterior recibe string
+4, en la linea 91 "  registro[indiceDisponible][2] = edad;" este error se resolve mediante el cambio anterior.
+5, en la linea 102 "for (double [] persona : registro) " en vez de double debe ser String
+6, en la linea 131 " for (double [] persona : registro)" en vez de double debe ser String, en las siguientes lineas de código qeu tenga este tipo de problema se resuelve de la miasma manera
