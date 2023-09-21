@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 
 
-public class Registro {
+public class CorreccionSintaxis {
     public static void main(String[] args) {
-        String [][] registro = new double[50][3];
+        String [][] registro = new String[50][3];
         int a = -1;
 
 
@@ -43,7 +43,7 @@ public class Registro {
                     int indiceDisponible = obtenerUltimoEspacio(registro);
                     String nombre;
                     String Estadocivil;
-                    int edad;
+                    String edad;
 
 
 
@@ -100,8 +100,8 @@ public class Registro {
 
 
 
-                for (double [] persona : registro) {
-                    if (persona[2] >= 18) mayoresDeEdad++;
+                for (String [] persona : registro) {
+                    if (Integer.parseInt(persona[2]) >= 18) mayoresDeEdad++;
                 }
 
 
@@ -116,7 +116,7 @@ public class Registro {
 
 
                 for (int i = 0; i < queSera; i++) {
-                    if (registro[i][2] < 18) menoresDeEdad++;
+                    if (Integer.parseInt(registro[i][2]) < 18) menoresDeEdad++;
                 }
 
 
@@ -129,10 +129,10 @@ public class Registro {
 
 
 
-                for (double [] persona : registro) {
-                    if (persona[2] >= 60 && persona[1].equals("casado/a")) {
+                for (String [] persona : registro) {
+                    if (Integer.parseInt(persona[2]) >= 60 && persona[1].equals("casado/a")) {
                         mmmm++;
-                    } else if(persona[2] >= 65 && persona[1].equals("soltero/a")) {
+                    } else if(Integer.parseInt(persona[2]) >= 65 && persona[1].equals("soltero/a")) {
                         mmmm++;
                     }
                 }
@@ -140,7 +140,7 @@ public class Registro {
             } else if(a == 5) {
                 int c = 0;
                 int d = 0;
-                for(double[] persona : registro) {
+                for(String[] persona : registro) {
                     if(persona[1].equals("casado/a")) {
                         c++;
                     } else if(persona[1].equals("soltero/a")) {
@@ -162,21 +162,21 @@ public class Registro {
 
 
 
-    public static int obtenerUltimoEspacio(double [][] registro) {
+    public static int obtenerUltimoEspacio(String [][] registro) {
         return registro.length - opa(registro);
     }
 
 
 
 
-    public static boolean hayCupo(double [][] registro) {
-        return opa(registro) != 0;
+    public static boolean hayCupo(String [][] registro) {
+        return !(opa(registro) == 0);
     }
 
 
 
 
-    public static int opa(double [][] registro) {
+    public static int opa(String [][] registro) {
         for(int i = 0; i < registro.length; i++) {
             if(registro[i][0].equals("")){
                 return registro.length - i;
