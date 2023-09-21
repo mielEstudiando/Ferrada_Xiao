@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Registro {
     public static void main(String[] args) {
         String [][] registro = new String[50][3];
-        int opcion = -1;
+        int opcion;
 
         do {
             menuEleccion();
@@ -21,11 +21,14 @@ public class Registro {
                     String Estadocivil;
                     String edad;
 
-                        nombre = scannerString();
+                    System.out.println("Ingrese su nombre:");
+                    nombre = scannerString();
 
-                        Estadocivil = scannerString();
+                    System.out.println("Ingrese su estado civil:");
+                    Estadocivil = verEstadoCivil();
 
-                        edad = String.valueOf(scannerInt());
+                    System.out.println("Ingrese su edad:");
+                    edad = String.valueOf(scannerInt());
 
                     registro[indiceDisponible][0] = nombre;
                     registro[indiceDisponible][1] = Estadocivil;
@@ -111,16 +114,18 @@ public class Registro {
 
 
     public static boolean hayCupo(String [][] registro) {
-        return (nombreVacio(registro) == 50);
+        return (nombreVacio(registro) >= 0);
     }
 
     public static int nombreVacio(String [][] registro) {
+        int cupos = 50;
         for(int i = 0; i < registro.length; i++) {
-            if(registro[i][0]==null){
-                return registro.length - i;
+            if(registro[i][0]!=null){
+                cupos -= 1;
+                if (i==50) return -1;
             }
         }
-        return 50;
+        return cupos;
     }
 
     private static void menuEleccion(){
@@ -150,6 +155,20 @@ public class Registro {
                 return new Scanner(System.in).nextLine();
             } catch (InputMismatchException e) {
                 System.err.println("Opción inválida");
+            }
+        }
+    }
+
+    private static String verEstadoCivil(){
+        System.out.println("C. Casado/a");
+        System.out.println("S. Soltero/a");
+        String estado;
+        while (true) {
+            estado = scannerString();
+            if (estado.equals("C")){
+                return "casado/a";
+            } else if (estado.equals("S")){
+                return "soltero/a";
             }
         }
     }
