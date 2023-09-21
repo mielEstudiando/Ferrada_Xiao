@@ -21,18 +21,11 @@ public class CreacionMetodos {
                     String Estadocivil;
                     String edad;
 
-                    while(true) {
                         nombre = scannerString();
-                        break;
-                    }
-                    while(true) {
+
                         Estadocivil = scannerString();
-                        break;
-                    }
-                    while(true) {
-                        edad = scannerString();
-                        break;
-                    }
+
+                        edad = String.valueOf(scannerInt());
 
                     registro[indiceDisponible][0] = nombre;
                     registro[indiceDisponible][1] = Estadocivil;
@@ -45,39 +38,49 @@ public class CreacionMetodos {
             } else if(opcion == 2) {
                 int mayoresDeEdad = 0;
 
-                for (String [] persona : registro) {
-                    if (Integer.parseInt(persona[2]) >= 18) mayoresDeEdad++;
+                if (nombreVacio(registro)!=0){
+                    for (String [] persona : registro) {
+                        if (Integer.parseInt(persona[2]) >= 18) mayoresDeEdad++;
+                    }
                 }
+
 
                 System.out.println("Hay " + mayoresDeEdad + " mayores de edad.");
             } else if(opcion == 3) {
                 int menoresDeEdad = 0;
                 int queSera = obtenerUltimoEspacio(registro);
 
-                for (int i = 0; i < queSera; i++) {
-                    if (Integer.parseInt(registro[i][2]) < 18) menoresDeEdad++;
+                if (nombreVacio(registro)!=0){
+                    for (int i = 0; i < queSera; i++) {
+                        if (Integer.parseInt(registro[i][2]) < 18) menoresDeEdad++;
+                    }
                 }
 
                 System.out.println("Hay " + menoresDeEdad + " menores de edad.");
             } else if(opcion == 4) {
                 int terceraEdad = 0;
 
-                for (String [] persona : registro) {
-                    if (Integer.parseInt(persona[2]) >= 60 && persona[1].equals("casado/a")) {
-                        terceraEdad++;
-                    } else if(Integer.parseInt(persona[2]) >= 65 && persona[1].equals("soltero/a")) {
-                        terceraEdad++;
+                if (nombreVacio(registro)!=0){
+                    for (String [] persona : registro) {
+                        if (Integer.parseInt(persona[2]) >= 60 && persona[1].equals("casado/a")) {
+                            terceraEdad++;
+                        } else if(Integer.parseInt(persona[2]) >= 65 && persona[1].equals("soltero/a")) {
+                            terceraEdad++;
+                        }
                     }
                 }
                 System.out.println("Hay " + terceraEdad + " personas de tercera edad");
             } else if(opcion == 5) {
                 int c = 0;
                 int d = 0;
-                for(String[] persona : registro) {
-                    if(persona[1].equals("casado/a")) {
-                        c++;
-                    } else if(persona[1].equals("soltero/a")) {
-                        d++;
+
+                if (nombreVacio(registro)!=0){
+                    for(String[] persona : registro) {
+                        if(persona[1].equals("casado/a")) {
+                            c++;
+                        } else if(persona[1].equals("soltero/a")) {
+                            d++;
+                        }
                     }
                 }
                 System.out.println("Hay " + d + " casados/as.");
@@ -85,7 +88,7 @@ public class CreacionMetodos {
             } else if(opcion == 6) {
                 System.out.println("Programa finalizado");
             }
-        }while (opcion == 6);
+        }while (opcion != 6);
     }
 
 
@@ -103,9 +106,11 @@ public class CreacionMetodos {
     }
 
     public static int nombreVacio(String [][] registro) {
-        for(int i = 0; i < registro.length; i++) {
-            if(registro[i][0].isEmpty()){
-                return registro.length - i;
+        if ((registro)[0][0]!=null){
+            for(int i = 0; i < registro.length; i++) {
+                if(registro[i][0].isEmpty()){
+                    return registro.length - i;
+                }
             }
         }
         return 0;
@@ -123,11 +128,13 @@ public class CreacionMetodos {
                 """);
     }
     private static int scannerInt(){
-        try {
-            return new Scanner(System.in).nextInt();
-        } catch (InputMismatchException e) {
-            System.err.println("Opción inválida");
-            return -1;
+        while(true){
+            try {
+                int numero = new Scanner(System.in).nextInt();
+                if (numero>=0) return numero;
+            } catch (InputMismatchException e) {
+                System.err.println("Opción inválida");
+            }
         }
     }
     private static String scannerString(){
@@ -136,7 +143,6 @@ public class CreacionMetodos {
                 return new Scanner(System.in).nextLine();
             } catch (InputMismatchException e) {
                 System.err.println("Opción inválida");
-                continue;
             }
         }
     }
